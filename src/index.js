@@ -14,6 +14,9 @@ app.use('/file', express.static(path.resolve(__dirname,'..',"tmp","uploads")));
 app.use(cors());
 
 app.use('/api',api);
+app.use('/', (req,res)=>{
+    return res.send("rota principal");
+});
 
 app.listen(PORT,()=>{
     console.log(`serve run ${PORT}`);
