@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const cors = require('cors');
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 const api = require('./routes/routes');
 const dotenv = require("dotenv");
 dotenv.config();
@@ -14,6 +14,7 @@ app.use('/file', express.static(path.resolve(__dirname,'..',"tmp","uploads")));
 app.use(cors());
 
 app.use('/api',api);
+
 app.get("/", (req, res) => {
     res.send("rota principal");
 });
