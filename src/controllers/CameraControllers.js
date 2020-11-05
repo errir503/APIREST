@@ -4,25 +4,20 @@ const Camera  = require('../models/Camera');
 module.exports ={
     async store(req,res){
 
-  
            
                 const file_name = req.file.originalname;
                 const size = req.file.size;
                 const key = req.file.filename;
                 const url = `${API_URL}/file/${key}`;
                 const ip = req.body.ip;
-                const quantity = req.body.quantity;
-            
-               
-                   const newCamera = await Camera.create({ip,quantity,file_name,url,size}); 
-                
-
-              
+                const quantity = req.body.quantity;              
+                const newCamera = await Camera.create({ip,quantity,file_name,url,size});               
                 return res.json(newCamera);
             
     },
     async list(req,res){
-        const cameras = await Camera.findAll();
+       
+        const cameras = await Camera.findAll({order:[['createdAt','DESC']]});
         return res.json(cameras);
     }
 
