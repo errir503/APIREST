@@ -1,47 +1,24 @@
-const Camera = require('../model/Camera');
 
+const API_URL = process.env.API_URL || "http://localhost:3001";
+const Camera  = require('../models/Camera');
 module.exports ={
     async store(req,res){
 
-          //const obj =  isEmpty(req.body);
-          
-          console.log('file',req.file);
-          console.log('data',req.body);
-         /* if(obj){
-              return res.json({
-                  erro:true,
-                 messagem:"operação falhou objeto vazio"
-              })
-          }*/
-
-         
-
-            const {
-                ip,
-                quantity,
-            }= req.body;
-
-            
+  
+           
                 const file_name = req.file.originalname;
                 const size = req.file.size;
                 const key = req.file.filename;
                 const url = `${API_URL}/file/${key}`;
+                const ip = req.body.ip;
+                const quantity = req.body.quantity;
             
-                const camera = await Camera.findOne({where:{ip:ip}});
-                if(camera){
-                        
-                    const newCamera = await Camera.update({ip,quantity,file_name,url,size},{where:{id:camera.id}});
-                    return res.json({
-                        erro: false,
-                        messagem: "operação realizada com sucesso",
-                    });
-                }else{
-                    const newCamera = await Camera.create({ip,quantity,file_name,url,size});
-                    return res.json(newCamera);
-                }
-           
-          return res.send();
-                 
+               
+                   const newCamera = await Camera.create({ip,quantity,file_name,url,size}); 
+                
+
+              
+                return res.json(newCamera);
             
     },
     async list(req,res){
