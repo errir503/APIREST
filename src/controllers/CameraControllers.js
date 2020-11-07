@@ -23,7 +23,6 @@ module.exports ={
     async endvalue(req,res){
         const cameras = await Camera.findAll({order:[['createdAt','DESC']]});
         let data = cameras[0].dataValues;
-        
         return res.json(data);
     },
     
