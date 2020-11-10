@@ -24,6 +24,21 @@ module.exports = {
       url:{
         type: Sequelize.STRING
       },
+      min:{
+        type: Sequelize.STRING
+      },
+      hour:{
+        type: Sequelize.STRING
+      },
+      day:{
+        type: Sequelize.STRING
+      },
+      month:{
+        type: Sequelize.STRING
+      },
+      year:{
+        type: Sequelize.STRING
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
