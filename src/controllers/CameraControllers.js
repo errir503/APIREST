@@ -2,6 +2,8 @@
 const API_URL = process.env.API_URL || "http://localhost:3001";
 const { where } = require('sequelize');
 const Camera  = require('../models/Camera');
+const Wifi = require('../models/Wifi');
+const Blue = require('../models/Bluetooth');
 module.exports ={
     async store(req,res){
 
@@ -34,10 +36,65 @@ module.exports ={
                 return res.json(newCamera);
             
     },
+    async blueStore(req,res){
+        
+        const data = new Date();
+        const min = data.getMinutes();
+        const hour = data.getHours();
+        const day = data.getDate();
+        const month = data.getMonth() + 1;
+        const year = data.getFullYear();
+        const quantity = req.body.quantity;  
+
+        const newBlue = await Blue.create(
+            {              
+                quantity,
+                min,
+                hour,
+                month,
+                day,
+                year,
+
+            });               
+        return res.json(newBlue);
+
+    },
+    async wifiStore(req,res){
+
+        const data = new Date();
+        const min = data.getMinutes();
+        const hour = data.getHours();
+        const day = data.getDate();
+        const month = data.getMonth() + 1;
+        const year = data.getFullYear();
+        const quantity = req.body.quantity;  
+
+        const newWif = await Wifi.create(
+            {              
+                quantity,
+                min,
+                hour,
+                month,
+                day,
+                year,
+
+            });               
+        return res.json(newWif);
+
+
+    },
     async list(req,res){
        
         const cameras = await Camera.findAll({order:[['createdAt','DESC']]});
         return res.json(cameras);
+    },
+    async wifiList(req,res){
+        const wifis = await Wifi.findAll();
+        return res.json(wifis);
+    },
+    async blueList(req,res){
+        const blues = await Blue.findAll();
+        return res.json(blues);
     },
     async endvalue(req,res){
         const cameras = await Camera.findAll({order:[['createdAt','DESC']]});
@@ -75,7 +132,10 @@ module.exports ={
          
         return res.json(arr);
 
+    },
+    async showDateMouth(req, res){
+        const camera = await Camera.findAll();
+        return res.json(camera);
     }
-
 
 }
