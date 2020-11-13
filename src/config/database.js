@@ -1,3 +1,4 @@
+
 /*
 module.exports={
   dialect: "postgres",
@@ -26,3 +27,4 @@ module.exports={
     underscored: true,
   },
 }
+

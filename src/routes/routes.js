@@ -2,23 +2,27 @@ const express = require('express');
 
 const router = express.Router();
 
-const Controllers = require('../controllers/Controllers');
+const CameraControllers = require('../controllers/CameraControllers');
+const WifiControllers = require('../controllers/WifiControllers');
+const BluetoothControllers = require('../controllers/BluetoothControllers');
 
 const multer = require('multer');
 const multerConfig = require('../config/multer');
 
 
-router.route('/cam/list').get(Controllers.list);
-router.route('/cam/store').post(multer(multerConfig).single('file'), Controllers.store);
-router.route('/cam/realtime').get(Controllers.endvalueCamera);
-router.route('/cam/average/day').get(Controllers.showDateDay);
+router.route('/cam/list').get(CameraControllers.list);
+router.route('/cam/store').post(multer(multerConfig).single('file'), CameraControllers.store);
+router.route('/cam/realtime').get(CameraControllers.endvalue);
+router.route('/cam/average/day').get(CameraControllers.showDateDay);
 
-router.route('/wifi/store').post(Controllers.wifiStore);
-router.route('/wifi/list').get(Controllers.wifiList);
-router.route('/wifi/realtime').get(Controllers.endvalueWifi);
+router.route('/wifi/store').post(WifiControllers.store);
+router.route('/wifi/list').get(WifiControllers.list);
+router.route('/wifi/realtime').get(WifiControllers.endvalue);
+router.route('/wifi/average/day').get(WifiControllers.showDateDay);
 
-router.route('/blue/store').post(Controllers.blueStore);
-router.route('/blue/list').get(Controllers.blueList);
-router.route('/blue/realtime').get(Controllers.endvalueBluetooth);
+router.route('/blue/store').post(BluetoothControllers.store);
+router.route('/blue/list').get(BluetoothControllers.list);
+router.route('/blue/realtime').get(BluetoothControllers.endvalue);
+router.route('/blue/average/day').get(WifiControllers.showDateDay);
 
 module.exports = router;

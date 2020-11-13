@@ -1,8 +1,11 @@
 const API_URL = process.env.API_URL || "http://localhost:3001";
 const { where } = require('sequelize');
 const Camera = require('../models/Camera');
+<<<<<<< HEAD:src/controllers/Controllers.js
 const Wifi = require('../models/Wifi');
 const Blue = require('../models/Bluetooth');
+=======
+>>>>>>> 7f9f83bbcc7f7219fa1a8824a1b93fa2d33085a4:src/controllers/CameraControllers.js
 
 module.exports = {
     async store(req, res) {
@@ -35,51 +38,6 @@ module.exports = {
         return res.json(newCamera);
 
     },
-    async blueStore(req, res) {
-
-        const data = new Date();
-        const min = data.getMinutes();
-        const hour = data.getHours();
-        const day = data.getDate();
-        const month = data.getMonth() + 1;
-        const year = data.getFullYear();
-        const quantity = req.body.quantity;
-
-        const newBlue = await Blue.create({
-            quantity,
-            min,
-            hour,
-            month,
-            day,
-            year,
-
-        });
-        return res.json(newBlue);
-
-    },
-    async wifiStore(req, res) {
-
-        const data = new Date();
-        const min = data.getMinutes();
-        const hour = data.getHours();
-        const day = data.getDate();
-        const month = data.getMonth() + 1;
-        const year = data.getFullYear();
-        const quantity = req.body.quantity;
-
-        const newWif = await Wifi.create({
-            quantity,
-            min,
-            hour,
-            month,
-            day,
-            year,
-
-        });
-        return res.json(newWif);
-
-
-    },
     async list(req, res) {
 
         const cameras = await Camera.findAll({
@@ -89,39 +47,13 @@ module.exports = {
         });
         return res.json(cameras);
     },
-    async wifiList(req, res) {
-        const wifis = await Wifi.findAll();
-        return res.json(wifis);
-    },
-    async blueList(req, res) {
-        const blues = await Blue.findAll();
-        return res.json(blues);
-    },
-    async endvalueCamera(req, res) {
+    async endvalue(req, res) {
         const cameras = await Camera.findAll({
             order: [
                 ['createdAt', 'DESC']
             ]
         });
         let data = cameras[0].dataValues;
-        return res.json(data);
-    },
-    async endvalueWifi(req, res) {
-        const Wifis = await Wifi.findAll({
-            order: [
-                ['createdAt', 'DESC']
-            ]
-        });
-        let data = Wifis[0].dataValues;
-        return res.json(data);
-    },
-    async endvalueBluetooth(req, res) {
-        const Blues = await Blue.findAll({
-            order: [
-                ['createdAt', 'DESC']
-            ]
-        });
-        let data = Blues[0].dataValues;
         return res.json(data);
     },
     async showDateDay(req, res) {
