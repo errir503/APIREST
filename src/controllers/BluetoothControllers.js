@@ -1,6 +1,6 @@
 const API_URL = process.env.API_URL || "http://localhost:3001";
 const { where } = require('sequelize');
-const Camera = require('../models/Camera');
+const Bluetooth = require('../models/Bluetooth');
 
 module.exports = {
     async store(req, res) {
@@ -11,18 +11,10 @@ module.exports = {
         const day = data.getDate();
         const month = data.getMonth() + 1;
         const year = data.getFullYear();
-        const file_name = req.file.originalname;
-        const size = req.file.size;
-        const key = req.file.filename;
-        const url = `${API_URL}/file/${key}`;
-        const ip = req.body.ip;
         const quantity = req.body.quantity;
-        const newCamera = await Camera.create({
-            ip,
+
+        const newWif = await Bluetooth.create({
             quantity,
-            file_name,
-            url,
-            size,
             min,
             hour,
             month,
@@ -30,31 +22,27 @@ module.exports = {
             year,
 
         });
-        return res.json(newCamera);
+        return res.json(newWif);
+
 
     },
     async list(req, res) {
-
-        const cameras = await Camera.findAll({
-            order: [
-                ['createdAt', 'DESC']
-            ]
-        });
-        return res.json(cameras);
+        const Bluetooths = await Bluetooth.findAll();
+        return res.json(Bluetooths);
     },
     async endvalue(req, res) {
-        const cameras = await Camera.findAll({
+        const Bluetooths = await Bluetooth.findAll({
             order: [
                 ['createdAt', 'DESC']
             ]
         });
-        let data = cameras[0].dataValues;
+        let data = Bluetooths[0].dataValues;
         return res.json(data);
     },
     async showDateDay(req, res) {
         const data = new Date();
         const day = data.getDate();
-        const cameraData = await Camera.findAll({
+        const BluetoothData = await Bluetooth.findAll({
             where: {
                 day: `${day}`
             }
@@ -64,7 +52,7 @@ module.exports = {
             let soma = 0;
             let tam = 0;
             let media
-            cameraData.map(item => {
+            BluetoothData.map(item => {
                 if (i == item.hour) {
                     soma = soma + item.quantity;
                     tam++;
@@ -84,8 +72,7 @@ module.exports = {
 
     },
     async showDateMouth(req, res) {
-        const camera = await Camera.findAll();
+        const Bluetooth = await Bluetooth.findAll();
         return res.json(camera);
     }
-
 }
