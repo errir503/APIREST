@@ -2,7 +2,9 @@ const express = require('express');
 
 const router = express.Router();
 
-const Controllers = require('../controllers/Controllers');
+const CameraControllers = require('../controllers/CameraControllers');
+const WifiControllers = require('../controllers/WifiControllers');
+const BluetoothControllers = require('../controllers/BluetoothControllers');
 
 const multer = require('multer');
 const multerConfig = require('../config/multer');
