@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const CameraControllers = require('../controllers/CameraControllers');
+const Controllers = require('../controllers/Controllers');
 
 const multer = require('multer');
 const multerConfig = require('../config/multer');
