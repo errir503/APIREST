@@ -4,7 +4,7 @@ class Rfid extends Model {
   static init(sequelize) {
     super.init(
       {       
-        id:DataTypes.STRING,
+        id_rfid:DataTypes.STRING,
         entrada:DataTypes.BOOLEAN,
         data_hora:DataTypes.DATE,
       },

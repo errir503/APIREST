@@ -4,9 +4,14 @@ module.exports = {
   up:(queryInterface, Sequelize) => {
     return queryInterface.createTable("rfids",{
       id:{
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         primareKey: true,
-      },         
+        autoIncrement:true,
+        allowNull:false,
+      }, 
+      id_rfid:{
+        type: Sequelize.STRING,
+      },
       entrada:{
         type: Sequelize.BOOLEAN,
         defaultValue: false,
