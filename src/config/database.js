@@ -1,4 +1,4 @@
-
+/*
 module.exports={
   dialect: "postgres",
   port: 5432,
@@ -12,7 +12,7 @@ module.exports={
     underscored: true,
   },
 }
-/*
+*/
 module.exports={
   dialect: "postgres",
   port: 5432,
@@ -25,4 +25,4 @@ module.exports={
     timestamps: true,
     underscored: true,
   },
-}*/
+}

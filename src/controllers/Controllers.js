@@ -3,6 +3,7 @@ const { where } = require('sequelize');
 const Camera = require('../models/Camera');
 const Wifi = require('../models/Wifi');
 const Blue = require('../models/Bluetooth');
+
 module.exports = {
     async store(req, res) {
 
@@ -158,6 +159,8 @@ module.exports = {
     async showDateMouth(req, res) {
         const camera = await Camera.findAll();
         return res.json(camera);
-    }
+    },
+
+   
 
 }
