@@ -1,11 +1,7 @@
 const API_URL = process.env.API_URL || "http://localhost:3001";
-const { where } = require('sequelize');
+
 const Camera = require('../models/Camera');
-<<<<<<< HEAD:src/controllers/Controllers.js
-const Wifi = require('../models/Wifi');
-const Blue = require('../models/Bluetooth');
-=======
->>>>>>> 7f9f83bbcc7f7219fa1a8824a1b93fa2d33085a4:src/controllers/CameraControllers.js
+
 
 module.exports = {
     async store(req, res) {
