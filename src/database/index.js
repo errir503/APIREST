@@ -8,11 +8,13 @@ const Wifi = require('../models/Wifi');
 const Bluetooth = require('../models/Bluetooth');
 const Rfid = require('../models/Rfid');
 const Gsm = require('../models/Gsm');
+const Pir = require('../models/Pir');
 
 Camera.init(connection);
 Wifi.init(connection);
 Bluetooth.init(connection);
 Rfid.init(connection);
 Gsm.init(connection);
+Pir.init(connection);
 
 module.exports = connection;

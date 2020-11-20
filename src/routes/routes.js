@@ -6,6 +6,7 @@ const CameraControllers = require('../controllers/CameraControllers');
 const WifiControllers = require('../controllers/WifiControllers');
 const BluetoothControllers = require('../controllers/BluetoothControllers');
 const GsmControllers = require('../controllers/GsmControllers');
+const PirControllers = require('../controllers/PirControllers');
 
 const multer = require('multer');
 const multerConfig = require('../config/multer');
@@ -30,5 +31,10 @@ router.route('/gsm/store').post(GsmControllers.store);
 router.route('/gsm/list').get(GsmControllers.list);
 router.route('/gsm/realtime').get(GsmControllers.endvalue);
 router.route('/gsm/average/day').get(GsmControllers.showDateDay);
+
+router.route('/pir/store').post(PirControllers.store);
+router.route('/pir/list').get(PirControllers.list);
+router.route('/pir/realtime').get(PirControllers.endvalue);
+router.route('/pir/average/day').get(PirControllers.showDateDay);
 
 module.exports = router;
