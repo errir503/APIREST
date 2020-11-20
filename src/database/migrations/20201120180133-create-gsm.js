@@ -2,7 +2,7 @@
 
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.createTable("wifis", {
+        return queryInterface.createTable("gsms", {
             id: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
@@ -40,7 +40,7 @@ module.exports = {
 
     down: async(queryInterface, Sequelize) => {
 
-        return queryInterface.dropTable('wifis');
+        return queryInterface.dropTable('gsms');
 
     }
 };

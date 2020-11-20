@@ -1,6 +1,6 @@
 const API_URL = process.env.API_URL || "http://localhost:3001";
 const { where } = require('sequelize');
-const Wifi = require('../models/Wifi');
+const Gsm = require('../models/Gsm');
 
 module.exports = {
     async store(req, res) {
@@ -13,7 +13,7 @@ module.exports = {
         const year = data.getFullYear();
         const quantity = req.body.quantity;
 
-        const newWif = await Wifi.create({
+        const newGsm = await Gsm.create({
             quantity,
             min,
             hour,
@@ -22,27 +22,27 @@ module.exports = {
             year,
 
         });
-        return res.json(newWif);
+        return res.json(newGsm);
 
 
     },
     async list(req, res) {
-        const wifis = await Wifi.findAll();
-        return res.json(wifis);
+        const Gsms = await Gsm.findAll();
+        return res.json(Gsms);
     },
     async endvalue(req, res) {
-        const Wifis = await Wifi.findAll({
+        const Gsms = await Gsm.findAll({
             order: [
                 ['createdAt', 'DESC']
             ]
         });
-        let data = Wifis[0].dataValues;
+        let data = Gsms[0].dataValues;
         return res.json(data);
     },
     async showDateDay(req, res) {
         const data = new Date();
         const day = data.getDate();
-        const wifiData = await Wifi.findAll({
+        const GsmData = await Gsm.findAll({
             where: {
                 day: `${day}`
             }
@@ -52,7 +52,7 @@ module.exports = {
             let soma = 0;
             let tam = 0;
             let media
-            wifiData.map(item => {
+            GsmData.map(item => {
                 if (i == item.hour) {
                     soma = soma + item.quantity;
                     tam++;
@@ -72,7 +72,7 @@ module.exports = {
 
     },
     async showDateMouth(req, res) {
-        const wifi = await Wifi.findAll();
-        return res.json(wifi);
+        const Gsm = await Gsm.findAll();
+        return res.json(Gsm);
     }
 }

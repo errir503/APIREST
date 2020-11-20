@@ -7,10 +7,12 @@ const Camera = require('../models/Camera');
 const Wifi = require('../models/Wifi');
 const Bluetooth = require('../models/Bluetooth');
 const Rfid = require('../models/Rfid');
+const Gsm = require('../models/Gsm');
 
 Camera.init(connection);
 Wifi.init(connection);
 Bluetooth.init(connection);
 Rfid.init(connection);
+Gsm.init(connection);
 
 module.exports = connection;

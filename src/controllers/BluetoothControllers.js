@@ -73,6 +73,6 @@ module.exports = {
     },
     async showDateMouth(req, res) {
         const Bluetooth = await Bluetooth.findAll();
-        return res.json(camera);
+        return res.json(Bluetooth);
     }
 }

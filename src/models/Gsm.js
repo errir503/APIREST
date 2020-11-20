@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 
-class Wifi extends Model {
+class Gsm extends Model {
     static init(sequelize) {
         super.init({
             quantity: DataTypes.INTEGER,
@@ -16,4 +16,4 @@ class Wifi extends Model {
 
 }
 
-module.exports = Wifi;
+module.exports = Gsm;
