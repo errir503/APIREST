@@ -7,7 +7,7 @@ const WifiControllers = require('../controllers/WifiControllers');
 const BluetoothControllers = require('../controllers/BluetoothControllers');
 const GsmControllers = require('../controllers/GsmControllers');
 const PirControllers = require('../controllers/PirControllers');
-
+const RfidControllers = require('../controllers/RfidControllers');
 const multer = require('multer');
 const multerConfig = require('../config/multer');
 
@@ -36,5 +36,9 @@ router.route('/pir/store').post(PirControllers.store);
 router.route('/pir/list').get(PirControllers.list);
 router.route('/pir/realtime').get(PirControllers.endvalue);
 router.route('/pir/average/day').get(PirControllers.showDateDay);
+
+router.route('/rfid/store').post(RfidControllers.rfidStore);
+router.route('/rfid/update').put(RfidControllers.rfidUpdate);
+router.route('/rfid/realtime').get(RfidControllers.rfiQuantity);
 
 module.exports = router;
