@@ -71,6 +71,52 @@ module.exports = {
         return res.json(arr);
 
     },
+    async averagePerDay(req, res){
+        const cameraData = await Gsm.findAll()
+    
+        date = {
+            day: 0,
+            month: 0,
+            yes: 0
+        }
+
+        date.day = cameraData[0].day;
+        date.month = cameraData[0].month;
+        date.year = cameraData[0].year;
+
+        average = [];
+        sum = 0, i = 0;
+    
+        cameraData.forEach(row => {
+            if ((row.day === date.day) && (row.month === date.month) && (date.year === row.year)){
+                sum += row.quantity;
+                i++;
+            } else {         
+                average.push((sum/i));
+                
+                sum = 0;
+                i = 0;
+    
+                date.day = row.day;
+                date.month = row.month;
+                date.year = row.year;
+    
+                sum += row.quantity;
+                i++;
+            }
+        });
+    
+        average.push((sum/i));
+        
+        //console.log(average);
+        
+        sum = 0;
+        average.forEach(item => {
+            sum += item;
+        });
+    
+        return res.json(sum/average.length);
+    },
     async showDateMouth(req, res) {
         const Gsm = await Gsm.findAll();
         return res.json(Gsm);

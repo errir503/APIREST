@@ -83,24 +83,29 @@ module.exports = {
         return res.json(arr);
 
     },
-    async avaragePerDay(req, res){
+    async averagePerDay(req, res){
         const cameraData = await Camera.findAll()
     
-        var date = {
-            day: cameraData[0].day,
-            month: cameraData[0].month,
-            yes: cameraData[0].year
+        date = {
+            day: 0,
+            month: 0,
+            yes: 0
         }
-    
-        avarage = [];
+
+        date.day = cameraData[0].day;
+        date.month = cameraData[0].month;
+        date.year = cameraData[0].year;
+
+        average = [];
         sum = 0, i = 0;
     
         cameraData.forEach(row => {
-            if (row.day == date.day && row.month == date.month && date.year == row.year){
-                sum += quantity;
+            if ((row.day === date.day) && (row.month === date.month) && (date.year === row.year)){
+                sum += row.quantity;
                 i++;
-            } else {
-                avarage.push((sum/i));
+            } else {         
+                average.push((sum/i));
+                
                 sum = 0;
                 i = 0;
     
@@ -113,8 +118,10 @@ module.exports = {
             }
         });
     
-        avarage.push((sum/i));
-    
+        average.push((sum/i));
+        
+        //console.log(average);
+        
         sum = 0;
         average.forEach(item => {
             sum += item;

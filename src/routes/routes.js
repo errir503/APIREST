@@ -16,7 +16,7 @@ router.route('/cam/list').get(CameraControllers.list);
 router.route('/cam/store').post(multer(multerConfig).single('file'), CameraControllers.store);
 router.route('/cam/realtime').get(CameraControllers.endvalue);
 router.route('/cam/average/day').get(CameraControllers.showDateDay);
-router.route('/cam/averagePerDay').get(CameraControllers.avaragePerDay);
+router.route('/cam/averagePerDay').get(CameraControllers.averagePerDay);
 
 router.route('/wifi/store').post(WifiControllers.store);
 router.route('/wifi/list').get(WifiControllers.list);
@@ -27,11 +27,13 @@ router.route('/blue/store').post(BluetoothControllers.store);
 router.route('/blue/list').get(BluetoothControllers.list);
 router.route('/blue/realtime').get(BluetoothControllers.endvalue);
 router.route('/blue/average/day').get(BluetoothControllers.showDateDay);
+router.route('/blue/averagePerDay').get(BluetoothControllers.averagePerDay);
 
 router.route('/gsm/store').post(GsmControllers.store);
 router.route('/gsm/list').get(GsmControllers.list);
 router.route('/gsm/realtime').get(GsmControllers.endvalue);
 router.route('/gsm/average/day').get(GsmControllers.showDateDay);
+router.route('/gsm/averagePerDay').get(GsmControllers.averagePerDay);
 
 router.route('/pir/store').post(PirControllers.store);
 router.route('/pir/list').get(PirControllers.list);
