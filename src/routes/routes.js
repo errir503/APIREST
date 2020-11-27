@@ -16,6 +16,7 @@ router.route('/cam/list').get(CameraControllers.list);
 router.route('/cam/store').post(multer(multerConfig).single('file'), CameraControllers.store);
 router.route('/cam/realtime').get(CameraControllers.endvalue);
 router.route('/cam/average/day').get(CameraControllers.showDateDay);
+router.route('/cam/averagePerDay').get(CameraControllers.avaragePerDay);
 
 router.route('/wifi/store').post(WifiControllers.store);
 router.route('/wifi/list').get(WifiControllers.list);

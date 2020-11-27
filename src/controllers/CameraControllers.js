@@ -2,7 +2,6 @@ const API_URL = process.env.API_URL || "http://localhost:3001";
 
 const Camera = require('../models/Camera');
 
-
 module.exports = {
     async store(req, res) {
 
@@ -83,6 +82,45 @@ module.exports = {
 
         return res.json(arr);
 
+    },
+    async avaragePerDay(req, res){
+        const cameraData = await Camera.findAll()
+    
+        var date = {
+            day: cameraData[0].day,
+            month: cameraData[0].month,
+            yes: cameraData[0].year
+        }
+    
+        avarage = [];
+        sum = 0, i = 0;
+    
+        cameraData.forEach(row => {
+            if (row.day == date.day && row.month == date.month && date.year == row.year){
+                sum += quantity;
+                i++;
+            } else {
+                avarage.push((sum/i));
+                sum = 0;
+                i = 0;
+    
+                date.day = row.day;
+                date.month = row.month;
+                date.year = row.year;
+    
+                sum += row.quantity;
+                i++;
+            }
+        });
+    
+        avarage.push((sum/i));
+    
+        sum = 0;
+        average.forEach(item => {
+            sum += item;
+        });
+    
+        return res.json(sum/average.length);
     },
     async showDateMouth(req, res) {
         const camera = await Camera.findAll();
