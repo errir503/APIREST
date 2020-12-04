@@ -120,14 +120,33 @@ module.exports = {
     
         average.push((sum/i));
         
-        //console.log(average);
-        
         sum = 0;
         average.forEach(item => {
             sum += item;
         });
     
         return res.json(sum/average.length);
+    },
+    async crowdANDquietDay(req, res){
+        const cameraData = await Camera.findAll();
+        let days = [0,0,0,0,0,0,0];
+        let DaysOfWeek = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+
+        cameraData.forEach(item => {
+            let date = new Date(item.year + "-" + item.month + "-" + item.day);
+            day = date.getDay();
+            days[day] += 1;
+        });
+
+        var arrayMaxIndex = days.indexOf(Math.max.apply(null, days));
+        var arrayMinIndex = days.indexOf(Math.min.apply(null, days));
+
+        crowdANDquiet = {
+            'crowd': DaysOfWeek[arrayMaxIndex],
+            'quiet': DaysOfWeek[arrayMinIndex]
+        }
+
+        return res.json(crowdANDquiet);
     },
     async showDateMouth(req, res) {
         const camera = await Camera.findAll();

@@ -17,6 +17,7 @@ router.route('/cam/store').post(multer(multerConfig).single('file'), CameraContr
 router.route('/cam/realtime').get(CameraControllers.endvalue);
 router.route('/cam/average/day').get(CameraControllers.showDateDay);
 router.route('/cam/averagePerDay').get(CameraControllers.averagePerDay);
+router.route('/cam/crowdANDquietDay').get(CameraControllers.crowdANDquietDay);
 
 router.route('/wifi/store').post(WifiControllers.store);
 router.route('/wifi/list').get(WifiControllers.list);
@@ -28,6 +29,7 @@ router.route('/blue/list').get(BluetoothControllers.list);
 router.route('/blue/realtime').get(BluetoothControllers.endvalue);
 router.route('/blue/average/day').get(BluetoothControllers.showDateDay);
 router.route('/blue/averagePerDay').get(BluetoothControllers.averagePerDay);
+router.route('/blue/crowdANDquietDay').get(BluetoothControllers.crowdANDquietDay);
 
 router.route('/gsm/store').post(GsmControllers.store);
 router.route('/gsm/list').get(GsmControllers.list);

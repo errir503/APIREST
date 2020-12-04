@@ -72,6 +72,27 @@ module.exports = {
         return res.json(arr);
 
     },
+    async crowdANDquietDay(req, res){
+        const blueData = await Bluetooth.findAll();
+        let days = [0,0,0,0,0,0,0];
+        let DaysOfWeek = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+
+        blueData.forEach(item => {
+            let date = new Date(item.year + "-" + item.month + "-" + item.day);
+            day = date.getDay();
+            days[day] += 1;
+        });
+
+        var arrayMaxIndex = days.indexOf(Math.max.apply(null, days));
+        var arrayMinIndex = days.indexOf(Math.min.apply(null, days));
+
+        crowdANDquiet = {
+            'crowd': DaysOfWeek[arrayMaxIndex],
+            'quiet': DaysOfWeek[arrayMinIndex]
+        }
+
+        return res.json(crowdANDquiet);
+    },
     async averagePerDay(req, res){
         const cameraData = await Bluetooth.findAll()
     
