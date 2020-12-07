@@ -1,7 +1,8 @@
 const API_URL = process.env.API_URL || "http://localhost:3001";
-const { where } = require('sequelize');
+const { where, Sequelize } = require('sequelize');
+var sequelize = require('../config/database.js');
+
 const Bluetooth = require('../models/Bluetooth');
-const { averagePerDay } = require('./CameraControllers');
 
 module.exports = {
     async store(req, res) {
@@ -92,6 +93,21 @@ module.exports = {
         }
 
         return res.json(crowdANDquiet);
+    },
+    async dateMoreOrLess(req, res){
+
+        let MaxQuantity = await Bluetooth.max('quantity');
+        let MinQuantity = await Bluetooth.min('quantity');
+        let dateMore = await Bluetooth.findAll({where: {quantity: MaxQuantity}});
+        let dateLess = await Bluetooth.findAll({where: {quantity: MinQuantity}});
+        console.log(MaxQuantity);
+
+        dateMoreOrLess = {
+            dateMore,
+            dateLess
+        }
+
+        return res.json(dateMoreOrLess);
     },
     async averagePerDay(req, res){
         const cameraData = await Bluetooth.findAll()
