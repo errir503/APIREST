@@ -43,13 +43,14 @@ module.exports = {
         return res.json(cameras);
     },
     async endvalue(req, res) {
-        const cameras = await Camera.findAll({
+        const cameras = await Camera.findOne({
             order: [
                 ['createdAt', 'DESC']
             ]
         });
-        let data = cameras[0].dataValues;
-        return res.json(data);
+       
+       
+        return res.json(cameras);
     },
     async showDateDay(req, res) {
         const data = new Date();
