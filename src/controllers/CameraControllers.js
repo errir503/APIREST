@@ -149,7 +149,7 @@ module.exports = {
 
         return res.json(crowdANDquiet);
     },
-    async dateMoreOrLess(req, res){
+    async dateMoreAndLess(req, res){
 
         let MaxQuantity = await Camera.max('quantity');
         let MinQuantity = await Camera.min('quantity');
@@ -157,12 +157,12 @@ module.exports = {
         let dateLess = await Camera.findAll({where: {quantity: MinQuantity}});
         console.log(MaxQuantity);
 
-        dateMoreOrLess = {
+        dateMoreAndLess = {
             dateMore,
             dateLess
         }
 
-        return res.json(dateMoreOrLess);
+        return res.json(dateMoreAndLess);
     },
     async showDateMouth(req, res) {
         const camera = await Camera.findAll();

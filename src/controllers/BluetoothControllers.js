@@ -94,7 +94,7 @@ module.exports = {
 
         return res.json(crowdANDquiet);
     },
-    async dateMoreOrLess(req, res){
+    async dateMoreAndLess(req, res){
 
         let MaxQuantity = await Bluetooth.max('quantity');
         let MinQuantity = await Bluetooth.min('quantity');
@@ -102,12 +102,12 @@ module.exports = {
         let dateLess = await Bluetooth.findAll({where: {quantity: MinQuantity}});
         console.log(MaxQuantity);
 
-        dateMoreOrLess = {
+        dateMoreAndLess = {
             dateMore,
             dateLess
         }
 
-        return res.json(dateMoreOrLess);
+        return res.json(dateMoreAndLess);
     },
     async averagePerDay(req, res){
         const cameraData = await Bluetooth.findAll()
