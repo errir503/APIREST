@@ -158,8 +158,8 @@ module.exports = {
         console.log(MaxQuantity);
 
         dateMoreAndLess = {
-            dateMore,
-            dateLess
+            dateMore: dateMore[0],
+            dateLess: dateLess[0]
         }
 
         return res.json(dateMoreAndLess);
