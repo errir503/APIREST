@@ -128,26 +128,48 @@ module.exports = {
     
         return res.json(sum/average.length);
     },
-    async crowdANDquietDay(req, res){
-        const cameraData = await Camera.findAll();
+    async crowdAndQuietDay(req, res){
+        const blueData = await Bluetooth.findAll();
         let days = [0,0,0,0,0,0,0];
         let DaysOfWeek = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
 
-        cameraData.forEach(item => {
+        blueData.forEach(item => {
             let date = new Date(item.year + "-" + item.month + "-" + item.day);
             day = date.getDay();
-            days[day] += 1;
+            days[day] += item.quantity;
         });
 
         var arrayMaxIndex = days.indexOf(Math.max.apply(null, days));
         var arrayMinIndex = days.indexOf(Math.min.apply(null, days));
 
-        crowdANDquiet = {
+        crowdAndQuiet = {
             'crowd': DaysOfWeek[arrayMaxIndex],
             'quiet': DaysOfWeek[arrayMinIndex]
         }
 
-        return res.json(crowdANDquiet);
+        return res.json(crowdAndQuiet);
+    },
+    async crowdAndQuietMonth(req, res){
+        const blueData = await Bluetooth.findAll();
+        let months = [0,0,0,0,0,0,0,0,0,0,0,0];
+        let MonthsOfYear = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro',
+        'Outubro', 'Novembro', 'Dezembro'];
+
+        blueData.forEach(item => {
+            let date = new Date(item.year + "-" + item.month + "-" + item.day);
+            month = date.getMonth();
+            months[month] += item.quantity;
+        });
+
+        var arrayMaxIndex = months.indexOf(Math.max.apply(null, months));
+        var arrayMinIndex = months.indexOf(Math.min.apply(null, months));
+
+        crowdAndQuiet = {
+            'crowd': MonthsOfYear[arrayMaxIndex],
+            'quiet': MonthsOfYear[arrayMinIndex]
+        }
+
+        return res.json(crowdAndQuiet);
     },
     async dateMoreAndLess(req, res){
 
