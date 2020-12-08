@@ -129,11 +129,11 @@ module.exports = {
         return res.json(sum/average.length);
     },
     async crowdAndQuietDay(req, res){
-        const blueData = await Bluetooth.findAll();
+        const cameraData = await Camera.findAll();
         let days = [0,0,0,0,0,0,0];
         let DaysOfWeek = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
 
-        blueData.forEach(item => {
+        cameraData.forEach(item => {
             let date = new Date(item.year + "-" + item.month + "-" + item.day);
             day = date.getDay();
             days[day] += item.quantity;
@@ -150,12 +150,12 @@ module.exports = {
         return res.json(crowdAndQuiet);
     },
     async crowdAndQuietMonth(req, res){
-        const blueData = await Bluetooth.findAll();
+        const cameraData = await Camera.findAll();
         let months = [0,0,0,0,0,0,0,0,0,0,0,0];
         let MonthsOfYear = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro',
         'Outubro', 'Novembro', 'Dezembro'];
 
-        blueData.forEach(item => {
+        cameraData.forEach(item => {
             let date = new Date(item.year + "-" + item.month + "-" + item.day);
             month = date.getMonth();
             months[month] += item.quantity;
