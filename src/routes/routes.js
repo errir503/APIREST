@@ -20,6 +20,7 @@ router.route('/cam/averagePerDay').get(CameraControllers.averagePerDay);
 router.route('/cam/crowdAndQuietDay').get(CameraControllers.crowdAndQuietDay);
 router.route('/cam/dateMoreAndLess').get(CameraControllers.dateMoreAndLess);
 router.route('/cam/crowdAndQuietMonth').get(CameraControllers.crowdAndQuietMonth);
+router.route('/cam/crowdAndQuietHour').get(CameraControllers.crowdAndQuietHour);
 
 router.route('/wifi/store').post(WifiControllers.store);
 router.route('/wifi/list').get(WifiControllers.list);
@@ -34,6 +35,7 @@ router.route('/blue/averagePerDay').get(BluetoothControllers.averagePerDay);
 router.route('/blue/crowdAndQuietDay').get(BluetoothControllers.crowdAndQuietDay);
 router.route('/blue/dateMoreAndLess').get(BluetoothControllers.dateMoreAndLess);
 router.route('/blue/crowdAndQuietMonth').get(BluetoothControllers.crowdAndQuietMonth);
+router.route('/blue/crowdAndQuietHour').get(BluetoothControllers.crowdAndQuietHour);
 
 router.route('/gsm/store').post(GsmControllers.store);
 router.route('/gsm/list').get(GsmControllers.list);

@@ -116,6 +116,30 @@ module.exports = {
 
         return res.json(crowdAndQuiet);
     },
+    async crowdAndQuietHour(req, res){
+        const blueData = await Bluetooth.findAll();
+        let hours = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        let HoursOfDay = ['00h','01h','02h','03h','04h','05h','06h','07h','08h',
+        '09h', '10h', '11h', '12h','13h','14h','15h','16h','17h','18h','19h','20h',
+        '21h', '22h', '23h'];
+
+        blueData.forEach(item => {
+            let date = new Date(item.year + "-" + item.month + "-" + item.day + " " + 
+            item.hour + ":" + item.min + ":00");
+            hour = date.getHours();
+            hours[hour] += item.quantity;
+        });
+
+        var arrayMaxIndex = hours.indexOf(Math.max.apply(null, hours));
+        var arrayMinIndex = hours.indexOf(Math.min.apply(null, hours));
+
+        crowdAndQuiet = {
+            'crowd': HoursOfDay[arrayMaxIndex],
+            'quiet': HoursOfDay[arrayMinIndex]
+        }
+
+        return res.json(crowdAndQuiet);
+    },
     async dateMoreAndLess(req, res){
 
         let MaxQuantity = await Bluetooth.max('quantity');
