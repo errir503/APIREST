@@ -8,6 +8,8 @@ const BluetoothControllers = require('../controllers/BluetoothControllers');
 const GsmControllers = require('../controllers/GsmControllers');
 const PirControllers = require('../controllers/PirControllers');
 const RfidControllers = require('../controllers/RfidControllers');
+const PlaceControllers = require('../controllers/PlaceControllers');
+
 const multer = require('multer');
 const multerConfig = require('../config/multer');
 
@@ -51,5 +53,9 @@ router.route('/pir/average/day').get(PirControllers.showDateDay);
 router.route('/rfid/store').post(RfidControllers.rfidStore);
 router.route('/rfid/update').put(RfidControllers.rfidUpdate);
 router.route('/rfid/realtime').get(RfidControllers.rfiQuantity);
+
+router.route('/place/store').post(PlaceControllers.store);
+router.route('/place/update').put(PlaceControllers.update);
+router.route('/place/show').get(PlaceControllers.show);
 
 module.exports = router;
